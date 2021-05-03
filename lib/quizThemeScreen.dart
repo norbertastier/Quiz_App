@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:quiz_app/quiz_helper.dart';
+import 'package:quiz_app/models/quiz_theme.dart';
 
+class QuizThemePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return QuizThemePageState();
+  }
+}
 
-class QuizThemePage extends StatelessWidget {
+class QuizThemePageState extends State<QuizThemePage> {
+  List<QuizTheme> listThemes = [];
 
-  Widget _buildQuizTheme(String path, String text){
+  Future<List<Map<String, dynamic>>> getThemes() async {
+    List<Map<String, dynamic>> listMap =
+        await QuizHelper.instance.queryAllRows();
+    setState(() {
+      listMap.forEach((map) => listThemes.add(QuizTheme.fromJson(map)));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getThemes();
+    super.initState();
+  }
+
+  @override
+  Widget _buildQuizTheme(String path, String text) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
@@ -48,8 +74,7 @@ class QuizThemePage extends StatelessWidget {
                   child: Text(
                     'Lancer le quiz',
                     style: TextStyle(
-                        fontFamily: 'SegoeUIBlack',
-                        color: Color(0xfffffbfa)),
+                        fontFamily: 'SegoeUIBlack', color: Color(0xfffffbfa)),
                     textScaleFactor: 1.2,
                   ),
                   onPressed: () {
@@ -72,13 +97,14 @@ class QuizThemePage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView(
-          children: [
-            _buildQuizTheme('assets/sport.png', 'Sport'),
-            _buildQuizTheme('assets/history.png', 'Histoire'),
-            _buildQuizTheme('assets/science.png', 'Science'),
-          ],
-        ),
+        body: ListView.builder(
+            itemCount: listThemes.length,
+            itemBuilder: (context, position) {
+              QuizTheme getTheme = listThemes[position];
+              var theme = getTheme.theme;
+              var path = getTheme.path;
+              return _buildQuizTheme(path, theme);
+            }),
       ),
     );
   }

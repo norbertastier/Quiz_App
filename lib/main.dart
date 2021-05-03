@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   QuizHelper _quizHelper = QuizHelper();
 
+
   @override
   void initState(){
     _quizHelper.initializeDatabase().then((value){
