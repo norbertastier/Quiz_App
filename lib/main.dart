@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_app/quizQuestionSceen.dart';
 import 'package:quiz_app/quiz_helper.dart';
 import 'homeScreen.dart';
 import 'quizThemeScreen.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'QuizApp',
-      home: MyHomePage(),
+      home: QuestionPage(),//MyHomePage(),
     );
   }
 }

@@ -1,23 +1,15 @@
 class QuizTheme {
-  QuizTheme({
-    this.id,
-    this.theme,
-    this.path,
-  });
+  int thmId;
+  String thmName, thmPath;
 
-  int id;
-  String theme;
-  String path;
+  QuizTheme(this.thmId, this.thmName, this.thmPath);
 
-  factory QuizTheme.fromJson(Map<String, dynamic> json) => QuizTheme(
-    id: json["id"],
-    theme: json["theme"],
-    path: json["path"],
-  );
+  //to be used when updating a row in the table
+  Map<String, dynamic> toMap() {
+    return {'id_theme': thmId, 'theme': thmName, 'path': thmPath};
+  }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "theme": theme,
-    "path": path,
-  };
+  //to be used when converting the row into object
+  factory QuizTheme.fromMap(Map<String, dynamic> map) =>
+      new QuizTheme(map['id_theme'], map['theme'], map['path']);
 }

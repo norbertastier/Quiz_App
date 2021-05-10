@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:quiz_app/QuizDataBase.dart';
 import 'package:quiz_app/quiz_helper.dart';
 import 'package:quiz_app/models/quiz_theme.dart';
 
@@ -12,23 +13,7 @@ class QuizThemePage extends StatefulWidget {
 }
 
 class QuizThemePageState extends State<QuizThemePage> {
-  List<QuizTheme> listThemes = [];
-
-  Future<List<Map<String, dynamic>>> getThemes() async {
-    List<Map<String, dynamic>> listMap =
-        await QuizHelper.instance.queryAllRows();
-    setState(() {
-      listMap.forEach((map) => listThemes.add(QuizTheme.fromJson(map)));
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    getThemes();
-    super.initState();
-  }
-
+  
   @override
   Widget _buildQuizTheme(String path, String text) {
     return Container(
@@ -97,13 +82,22 @@ class QuizThemePageState extends State<QuizThemePage> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView.builder(
-            itemCount: listThemes.length,
-            itemBuilder: (context, position) {
-              QuizTheme getTheme = listThemes[position];
-              var theme = getTheme.theme;
-              var path = getTheme.path;
-              return _buildQuizTheme(path, theme);
+        body: FutureBuilder<List<QuizTheme>>(
+            future: QuizDataBase.instance.themes(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<QuizTheme>> snapshot) {
+              if (snapshot.hasData) {
+                List<QuizTheme> themes = snapshot.data;
+                return ListView.builder(
+                  itemCount: themes.length,
+                  itemBuilder: (context, index) {
+                    final theme = themes[index];
+                    return _buildQuizTheme(theme.thmPath, theme.thmName);
+                  },
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             }),
       ),
     );
