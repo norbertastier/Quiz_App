@@ -95,7 +95,21 @@ class QuizDataBase {
       for (QuizQuestion question in defaultQuestions) {
         insertQuestion(question);
       }
-      getExcel();
+      questions = defaultQuestions;
+    }
+    return questions;
+  }
+
+  Future<List<QuizQuestion>> questionstheme(int idtheme) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM question WHERE theme == $idtheme");
+    List<QuizQuestion> questions = List.generate(maps.length, (i) {
+      return QuizQuestion.fromMap(maps[i]);
+    });
+    if (questions.isEmpty) {
+      for (QuizQuestion question in defaultQuestions) {
+        insertQuestion(question);
+      }
       questions = defaultQuestions;
     }
     return questions;
@@ -107,30 +121,11 @@ class QuizDataBase {
     QuizTheme(3, 'Science', 'assets/science.png')
   ];
 
-  final List<QuizQuestion> defaultQuestions = [];
-
-  void getExcel() {
-    print("coucou excel");
-    var file = "assets/questions.xlsx";
-    var bytes = File(file).readAsBytesSync();
-    var excel = Excel.decodeBytes(bytes);
-
-    for (var table in excel.tables.keys) {
-      print(table); //sheet Name
-      print(excel.tables[table].maxCols);
-      print(excel.tables[table].maxRows);
-      for (var row in excel.tables[table].rows) {
-        print("$row");
-      }
-    }
-  }
-
-
-
-
-
-
-  /* for(i lenght excel)
-   defaultQuestion.add(1 )"""*/
+  final List<QuizQuestion> defaultQuestions = [
+    QuizQuestion(1, 'Mon nom est-il Astier ?', 1, '', 'Vrai', 0, 1),
+    QuizQuestion(2, 'Mon prénom est-il Astier ?', 1, '', 'Faux', 0, 1),
+    QuizQuestion(3, 'Ai-je 18 ans ?', 1, '', 'Faux', 0, 1),
+    QuizQuestion(4, 'Complétez l\'expression : Qui vole un œuf vole…', 2, 'Un keuf,Un oeuf,Un neuf,Un boeuf', 'Un boeuf', 0, 1),
+  ];
 }
 

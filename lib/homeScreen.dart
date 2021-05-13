@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/main.dart';
+import 'package:quiz_app/quizThemeScreen.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  VoidCallback callback;
+  HomePage(this.callback);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,13 +75,10 @@ class HomePage extends StatelessWidget {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [
-                                  Color(0xff8BD7D2),
-                                  Color(0xff00BD9D)
-                                ],
+                                colors: [Color(0xff8BD7D2), Color(0xff00BD9D)],
                               ),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(100)),
+                                  BorderRadius.all(Radius.circular(100)),
                             ),
                             child: TextButton(
                                 child: Text(
@@ -83,7 +89,9 @@ class HomePage extends StatelessWidget {
                                   textScaleFactor: 1.6,
                                 ),
                                 onPressed: () {
-                                  print('Pressed');
+                                  setState(() {
+                                    widget.callback();
+                                  });
                                 })),
                       ],
                     ),

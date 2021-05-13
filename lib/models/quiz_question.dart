@@ -1,6 +1,6 @@
 class QuizQuestion {
-  int id_question, enable, theme;
-  String question, type, answers, correct;
+  int id_question, enable, theme, type;
+  String question, answers, correct;
 
   QuizQuestion(
     this.id_question,

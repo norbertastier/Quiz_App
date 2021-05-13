@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:quiz_app/QuizDataBase.dart';
+import 'package:quiz_app/quizQuestionSceen.dart';
 import 'package:quiz_app/quiz_helper.dart';
 import 'package:quiz_app/models/quiz_theme.dart';
 
 class QuizThemePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return QuizThemePageState();
   }
 }
@@ -63,6 +63,7 @@ class QuizThemePageState extends State<QuizThemePage> {
                     textScaleFactor: 1.2,
                   ),
                   onPressed: () {
+                    Navigator.of(context).pushNamed('/QuestionPage');
                     print('Pressed');
                   })),
         ],
