@@ -17,7 +17,7 @@ class _BuildQuestionState extends State<BuildQuestion>{
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-          width: double.infinity,
+          width: 500,
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.only(
             top: 50,
@@ -36,7 +36,7 @@ class _BuildQuestionState extends State<BuildQuestion>{
                   fontSize: 20,
                   fontFamily: 'SegoeUIBlack',
                 ),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.start,
               ),
 
               Expanded(child: Container(),),

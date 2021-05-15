@@ -11,6 +11,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: Container(
+              width: 500,
               decoration: BoxDecoration(
                   color: Color(0xfffffbfa),
                   borderRadius: BorderRadius.only(

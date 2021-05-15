@@ -9,6 +9,7 @@ class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -36,7 +37,7 @@ class _ProfilPageState extends State<ProfilPage> {
           ),
           Expanded(
             child: Container(
-              width: double.infinity,
+              width: 500,
               decoration: BoxDecoration(
                   color: Color(0xfffffbfa),
                   borderRadius: BorderRadius.only(

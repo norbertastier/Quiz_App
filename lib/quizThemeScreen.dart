@@ -82,7 +82,7 @@ class QuizThemePageState extends State<QuizThemePage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder<List<QuizTheme>>(
-            future: QuizDataBase.instance.themes(),
+            future: themes() ,
             builder:
                 (BuildContext context, AsyncSnapshot<List<QuizTheme>> snapshot) {
               if (snapshot.hasData) {
@@ -100,5 +100,13 @@ class QuizThemePageState extends State<QuizThemePage> {
             }),
       ),
     );
+  }
+  Future<List<QuizTheme>> themes() async{
+   List<QuizTheme> defaultThemes = [
+    QuizTheme(1, 'Sport', 'assets/sport.png'),
+    QuizTheme(2, 'Histoire', 'assets/history.png'),
+    QuizTheme(3, 'Science', 'assets/science.png'),
+   ];
+  return defaultThemes;
   }
 }
