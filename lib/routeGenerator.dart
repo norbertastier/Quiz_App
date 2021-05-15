@@ -17,7 +17,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => QuizThemePage());
 
       case '/QuestionPage':
-        return MaterialPageRoute(builder: (_) => QuestionPage());
+        if (args is int) {
+          return MaterialPageRoute(
+            builder: (_) =>
+                QuestionPage(args),
+          );
+        }return _errorRoute();
 
       case '/ScorePage':
       // Validation of correct data type

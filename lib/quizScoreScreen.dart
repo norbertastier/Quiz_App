@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/main.dart';
 
 class ScorePage extends StatefulWidget {
   final int score;
@@ -43,7 +42,7 @@ class _ScorePageState extends State<ScorePage> {
                   scale: 1,
                 ),
                 Text(
-                  widget.score.toString()+'/10',
+                  widget.score.toString()+'/7',
                   style: TextStyle(
                     fontSize: 60,
                     fontFamily: 'SegoeUIBlack',

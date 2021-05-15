@@ -106,6 +106,7 @@ class _BuildQuestionState extends State<BuildQuestion>{
         child: TextButton(
             child: Text(
               text,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 15,
                   fontFamily: 'SegoeUIBlack',

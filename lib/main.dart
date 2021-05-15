@@ -1,20 +1,21 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_app/getExcel.dart';
-import 'package:quiz_app/quizQuestionSceen.dart';
+import 'package:flutter/services.dart';
+import 'package:quiz_app/profilScreen.dart';
 import 'package:quiz_app/quizScoreScreen.dart';
-import 'package:quiz_app/quiz_helper.dart';
 import 'package:quiz_app/routeGenerator.dart';
 import 'homeScreen.dart';
 import 'quizThemeScreen.dart';
-import 'profilScreen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'QuizApp',
@@ -30,14 +31,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  QuizHelper _quizHelper = QuizHelper();
-
   @override
   void initState() {
-    _quizHelper.initializeDatabase().then((value) {
-      print('------database initialized');
-      getExcel();
-    });
     super.initState();
   }
 
@@ -50,13 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
         {
           return HomePage(refresh);
         }
+        break;
       case 1:
         {
           return QuizThemePage();
         }
+        break;
       case 2:
         {
-          return ScorePage(4);
+          return ProfilPage();
+        }
+        break;
+      default:
+        {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Error'),
+            ),
+            body: Center(
+              child: Text('ERROR'),
+            ),
+          );
         }
     }
   }
@@ -76,11 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.menu),
-            iconSize: 50,
-            color: Colors.black,
-            onPressed: () {}),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

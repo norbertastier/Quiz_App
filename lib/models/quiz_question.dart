@@ -12,7 +12,7 @@ class QuizQuestion {
     this.theme,
   );
 
-  Map<String, dynamic> toMap() {
+  Map<String, Object> toMap() {
     return {
       'id_question': id_question,
       'question': question,
@@ -24,12 +24,12 @@ class QuizQuestion {
     };
   }
 
-  factory QuizQuestion.fromMap(Map<String, dynamic> map) => new QuizQuestion(
-      map['question'],
-      map['question'],
-      map['type'],
-      map['answers'],
-      map['correct'],
-      map['enable'],
-      map['theme']);
+  QuizQuestion.fromMap(Map<String, dynamic> map)
+      : id_question = map['id_question'],
+        question = map['question'],
+        type = map['type'],
+        answers = map['answers'],
+        correct = map['correct'],
+        enable = map['enable'],
+        theme = map['theme'];
 }

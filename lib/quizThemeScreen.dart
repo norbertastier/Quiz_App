@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:quiz_app/QuizDataBase.dart';
-import 'package:quiz_app/quizQuestionSceen.dart';
-import 'package:quiz_app/quiz_helper.dart';
 import 'package:quiz_app/models/quiz_theme.dart';
 
 class QuizThemePage extends StatefulWidget {
@@ -15,7 +13,7 @@ class QuizThemePage extends StatefulWidget {
 class QuizThemePageState extends State<QuizThemePage> {
   
   @override
-  Widget _buildQuizTheme(String path, String text) {
+  Widget _buildQuizTheme(String path, String text,int id) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
@@ -63,7 +61,7 @@ class QuizThemePageState extends State<QuizThemePage> {
                     textScaleFactor: 1.2,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/QuestionPage');
+                    Navigator.of(context).pushNamed('/QuestionPage', arguments:id);
                     print('Pressed');
                   })),
         ],
@@ -93,7 +91,7 @@ class QuizThemePageState extends State<QuizThemePage> {
                   itemCount: themes.length,
                   itemBuilder: (context, index) {
                     final theme = themes[index];
-                    return _buildQuizTheme(theme.thmPath, theme.thmName);
+                    return _buildQuizTheme(theme.thmPath, theme.thmName,theme.thmId);
                   },
                 );
               } else {

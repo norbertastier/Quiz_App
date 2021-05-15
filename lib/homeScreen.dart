@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/main.dart';
-import 'package:quiz_app/quizThemeScreen.dart';
 
 class HomePage extends StatefulWidget {
   VoidCallback callback;

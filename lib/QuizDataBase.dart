@@ -3,7 +3,6 @@ import 'package:path/path.dart';
 import 'package:quiz_app/models/quiz_theme.dart';
 import 'package:quiz_app/models/quiz_question.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:quiz_app/getExcel.dart';
 import 'dart:io';
 import 'package:excel/excel.dart';
 
@@ -25,10 +24,10 @@ class QuizDataBase {
     return await openDatabase(
       join(await getDatabasesPath(), 'quiz_database.db'),
       onCreate: (db, version) {
-        return db.execute(
+        db.execute(
           "CREATE TABLE theme(id_theme INTEGER NOT NULL, theme TEXT NOT NULL, path TEXT NOT NULL, PRIMARY KEY('id_theme' AUTOINCREMENT));"
-          "CREATE TABLE question(id_question INTEGER NOT NULL, question TEXT NOT NULL, type TEXT NOT NULL, answers TEXT, correct TEXT, enable INTEGER NOT NULL, theme INTEGER NOT NULL, PRIMARY KEY('id_question' AUTOINCREMENT), FOREIGN KEY(theme) REFERENCES theme(id_theme)); ",
-        );
+          );
+        db.execute("CREATE TABLE question(id_question INTEGER NOT NULL, question TEXT NOT NULL, type TEXT NOT NULL, answers TEXT, correct TEXT, enable INTEGER NOT NULL, theme INTEGER NOT NULL, PRIMARY KEY('id_question' AUTOINCREMENT), FOREIGN KEY(theme) REFERENCES theme(id_theme)); ",);
       },
       version: 1,
     );
@@ -64,7 +63,7 @@ class QuizDataBase {
       }
       themes = defaultThemes;
     }
-    return themes;
+    return themes = defaultThemes;
   }
 
   void insertQuestion(QuizQuestion question) async {
@@ -118,7 +117,8 @@ class QuizDataBase {
   final List<QuizTheme> defaultThemes = [
     QuizTheme(1, 'Sport', 'assets/sport.png'),
     QuizTheme(2, 'Histoire', 'assets/history.png'),
-    QuizTheme(3, 'Science', 'assets/science.png')
+    QuizTheme(3, 'Science', 'assets/science.png'),
+
   ];
 
   final List<QuizQuestion> defaultQuestions = [
