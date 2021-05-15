@@ -19,7 +19,7 @@ class _ProfilPageState extends State<ProfilPage> {
       child: Column(
         children: [
           SizedBox(
-            height: 60,
+            height: 30,
           ),
           Image.asset(
             'assets/profil.png',
@@ -27,7 +27,7 @@ class _ProfilPageState extends State<ProfilPage> {
           ),
           Container(
             padding: EdgeInsets.only(
-              bottom: 20,
+              bottom: 10,
             ),
             child: Text(
               "Pierre",
