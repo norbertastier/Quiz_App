@@ -339,7 +339,7 @@ class _QuestionPageState extends State<QuestionPage> {
         BuildQuestion(
             QuizQuestion(
                 21,
-                'En quelle année les premiers Jeux paralympiques d\hiver ont-ils eu lieu ?',
+                'En quelle année les premiers Jeux paralympiques d\'hiver ont-ils eu lieu ?',
                 2,
                 'En 1948,En 1960,En 1976,En 1980',
                 'En 1976',

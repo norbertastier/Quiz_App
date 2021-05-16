@@ -11,9 +11,8 @@ class QuizThemePage extends StatefulWidget {
 }
 
 class QuizThemePageState extends State<QuizThemePage> {
-  
   @override
-  Widget _buildQuizTheme(String path, String text,int id) {
+  Widget _buildQuizTheme(String path, String text, int id) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
@@ -34,13 +33,15 @@ class QuizThemePageState extends State<QuizThemePage> {
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 50,
+                fontSize: 40,
                 fontFamily: 'SegoeUIBlack',
                 color: Color(0xfffffbfa),
               ),
+              textAlign: TextAlign.center,
             ),
           ),
           Container(
+              margin: EdgeInsets.only(top: 10),
               padding: EdgeInsets.only(
                 right: 20,
                 left: 20,
@@ -61,7 +62,8 @@ class QuizThemePageState extends State<QuizThemePage> {
                     textScaleFactor: 1.2,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/QuestionPage', arguments:id);
+                    Navigator.of(context)
+                        .pushNamed('/QuestionPage', arguments: id);
                     print('Pressed');
                   })),
         ],
@@ -82,16 +84,17 @@ class QuizThemePageState extends State<QuizThemePage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder<List<QuizTheme>>(
-            future: themes() ,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<QuizTheme>> snapshot) {
+            future: themes(),
+            builder: (BuildContext context,
+                AsyncSnapshot<List<QuizTheme>> snapshot) {
               if (snapshot.hasData) {
                 List<QuizTheme> themes = snapshot.data;
                 return ListView.builder(
                   itemCount: themes.length,
                   itemBuilder: (context, index) {
                     final theme = themes[index];
-                    return _buildQuizTheme(theme.thmPath, theme.thmName,theme.thmId);
+                    return _buildQuizTheme(
+                        theme.thmPath, theme.thmName, theme.thmId);
                   },
                 );
               } else {
@@ -101,12 +104,13 @@ class QuizThemePageState extends State<QuizThemePage> {
       ),
     );
   }
-  Future<List<QuizTheme>> themes() async{
-   List<QuizTheme> defaultThemes = [
-    QuizTheme(1, 'Sport', 'assets/sport.png'),
-    QuizTheme(2, 'Histoire', 'assets/history.png'),
-    QuizTheme(3, 'Science', 'assets/science.png'),
-   ];
-  return defaultThemes;
+
+  Future<List<QuizTheme>> themes() async {
+    List<QuizTheme> defaultThemes = [
+      QuizTheme(1, 'Sport', 'assets/sport.png'),
+      QuizTheme(2, 'Histoire Géographie', 'assets/history.png'),
+      QuizTheme(3, 'Science', 'assets/science.png'),
+    ];
+    return defaultThemes;
   }
 }
